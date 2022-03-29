@@ -1,0 +1,5 @@
+0  Unknown 0 0 0 0 
+1  Molecular_layer 225 232 246 0   
+2  Granular_layer 25 69 126 0 
+3  White_matter 242 241 240 0
+
