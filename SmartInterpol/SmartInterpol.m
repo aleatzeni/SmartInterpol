@@ -140,6 +140,8 @@ F3D = './functions/NiftyReg/Linux_files/niftyreg/reg-apps/reg_f3d';
 RESAMPLE = './functions/NiftyReg/Linux_files/niftyreg/reg-apps/reg_resample';
 TRANSFORM = './functions/NiftyReg/Linux_files/niftyreg/reg-apps/reg_transform';
 
+system(['chmod u+x ./functions/NiftyReg/Linux_files/niftyreg/reg-apps/reg_*' ])
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % First thing: create output directory if necessary - or throw an error if
 % % directory already exists and is not empty...
