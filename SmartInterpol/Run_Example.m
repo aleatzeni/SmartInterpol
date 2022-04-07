@@ -3,11 +3,10 @@ close all
 clc
 
 % % % %%%%%%%%%%%%% EXAMPLE %%%%%%%%%%%%
-im_vol = './inputIM.nii.gz';
-lab_vol = './inputLAB.nii.gz';
-result_path = './test/';
-trained_net_file = './global_weights.mat';
- 
-SmartInterpol(im_vol, lab_vol, result_path, trained_net_file,'firstSliceOption',2,'lastSliceOption',2, 'maxepoch_global',100,'maxepoch_local',50);
+im_vol = '../sample_data/inputIM.nii.gz';
+lab_vol = '../sample_data/inputLAB.nii.gz';
+result_path = '../testLAB/'; % does not exist, will be created
+trained_net_file = '../testLAB/trained_net.mat'; % does not exist, will be created
 
+SmartInterpol(im_vol, lab_vol, result_path, trained_net_file)
 
