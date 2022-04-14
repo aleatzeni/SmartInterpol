@@ -199,14 +199,14 @@ if isVol==1
     permutation = detectLabPlane(lab_path);
     
     disp('Loading input volume')
-    vol = myMRIread(char(im_path));
+    vol = myMRIread(char(im_path),0,tempdir);
     volRearranged = permute(vol.vol,permutation);
     Nims = size(volRearranged,3);
     
     clear vol
     
     disp('Loading input segmentation volume')
-    lab = myMRIread(char(lab_path));
+    lab = myMRIread(char(lab_path),0,tempdir);
     labRearranged = permute(lab.vol,permutation);
     labListFull=unique(labRearranged(:));
     Nlab = length(labListFull);
@@ -427,7 +427,7 @@ if ~exist(trained_net_path,'file')
         % Eugenio: augment N_AUG time
                 
         % images
-        Imri=myMRIread(char(imageFiles{i}));
+        Imri=myMRIread(char(imageFiles{i}),0,tempdir);
         I=double(Imri.vol);
        
         if size(I,3)==1 && multiscale==1
@@ -439,7 +439,7 @@ if ~exist(trained_net_path,'file')
         end
         
         % labels
-        Lmri=myMRIread(char(simpleLabelFiles{i}));
+        Lmri=myMRIread(char(simpleLabelFiles{i}),0,tempdir);
         L=Lmri.vol;
         if size(L,3)>1, error('Label files should not have multiple channels...'); end
         if any(L(:)>255), error('Simple labels cannot be greater than 255'); end
@@ -598,7 +598,7 @@ if ~exist(trained_net_path,'file')
             try
                 I=imread(imageFiles{i});
             catch
-                Imri=myMRIread(char(imageFiles{i}));
+                Imri=myMRIread(char(imageFiles{i}),0,tempdir);
                 I=uint8(repmat(Imri.vol,[1 1 3]));
             end
             POST = activations(trainedNetGlobal,I,'softmax');
@@ -646,11 +646,11 @@ for i=find(isTest)
     %Load test image at full resolution
     if lf_downsampling_factor==1
         TESTfilename = [imgFilesFullRes{i}.folder filesep imgFilesFullRes{i}.name];
-        mri=myMRIread(char(TESTfilename));
+        mri=myMRIread(char(TESTfilename),0,tempdir);
         TESTimage=mri.vol;
     else
         TESTfilename = [imgFilesHalfRes{i}.folder filesep imgFilesHalfRes{i}.name];
-        mri=myMRIread(char(TESTfilename));
+        mri=myMRIread(char(TESTfilename),0,tempdir);
         TESTimage=mri.vol;
     end
     
@@ -695,7 +695,7 @@ for i=find(isTest)
             end
             
             % Upsample dense deformation field
-            mri=myMRIread(char(dense_def));
+            mri=myMRIread(char(dense_def),0,tempdir);
             dense_def_lowRes=squeeze(mri.vol);
             
             dense_def_lowResR=dense_def_lowRes(:,:,1);
@@ -724,7 +724,7 @@ for i=find(isTest)
             if res4, error('Error in reg_resample'); end
         end
         % Gather list of labels
-        mri=myMRIread(char(fullLabelFiles{idx}));
+        mri=myMRIread(char(fullLabelFiles{idx}),0,tempdir);
         SEG=mri.vol;
         SEGS{idx}=SEG;
     end
@@ -773,22 +773,22 @@ for i=find(isTest)
     % Load warped images
     if downsampling_factor~=1
         if lf_downsampling_factor~=1
-            warped_imageI=myMRIread(char(strcat(regdir,num2str(indI),'to',num2str(i),'_nonlin_HalfRes.nii.gz')));
-            warped_imageJ=myMRIread(char(strcat(regdir,num2str(indJ),'to',num2str(i),'_nonlin_HalfRes.nii.gz')));
+            warped_imageI=myMRIread(char(strcat(regdir,num2str(indI),'to',num2str(i),'_nonlin_HalfRes.nii.gz')),0,tempdir);
+            warped_imageJ=myMRIread(char(strcat(regdir,num2str(indJ),'to',num2str(i),'_nonlin_HalfRes.nii.gz')),0,tempdir);
             
         else
-            warped_imageI=myMRIread(char(strcat(regdir,num2str(indI),'to',num2str(i),'_nonlin_fullRes.nii.gz')));
-            warped_imageJ=myMRIread(char(strcat(regdir,num2str(indJ),'to',num2str(i),'_nonlin_fullRes.nii.gz')));
+            warped_imageI=myMRIread(char(strcat(regdir,num2str(indI),'to',num2str(i),'_nonlin_fullRes.nii.gz')),0,tempdir);
+            warped_imageJ=myMRIread(char(strcat(regdir,num2str(indJ),'to',num2str(i),'_nonlin_fullRes.nii.gz')),0,tempdir);
         end
     else
-        warped_imageI=myMRIread(char(strcat(regdir,num2str(indI),'to',num2str(i),'_nonlin.nii.gz')));
-        warped_imageJ=myMRIread(char(strcat(regdir,num2str(indJ),'to',num2str(i),'_nonlin.nii.gz')));
+        warped_imageI=myMRIread(char(strcat(regdir,num2str(indI),'to',num2str(i),'_nonlin.nii.gz')),0,tempdir);
+        warped_imageJ=myMRIread(char(strcat(regdir,num2str(indJ),'to',num2str(i),'_nonlin.nii.gz')),0,tempdir);
     end
     
     
     % Load warped probability maps of each label
-    prob_warpedI=myMRIread(char(strcat(regdir,num2str(indI),'_to_',num2str(i),'_WarpedProbMap.nii.gz')));
-    prob_warpedJ=myMRIread(char(strcat(regdir,num2str(indJ),'_to_',num2str(i),'_WarpedProbMap.nii.gz')));
+    prob_warpedI=myMRIread(char(strcat(regdir,num2str(indI),'_to_',num2str(i),'_WarpedProbMap.nii.gz')),0,tempdir);
+    prob_warpedJ=myMRIread(char(strcat(regdir,num2str(indJ),'_to_',num2str(i),'_WarpedProbMap.nii.gz')),0,tempdir);
     
     fprintf('   Computing posteriors with label fusion for test slice %d after registration with %d and %d \n',i,indI,indJ )
     
@@ -860,7 +860,7 @@ for i=find(isTest)
             % brightness / gamma augmentation
             
             % images
-            Imri=myMRIread(char(imageFiles{j}));
+            Imri=myMRIread(char(imageFiles{j}),0,tempdir);
             I=uint8(Imri.vol);
             if size(I,3)==1 && multiscale==1
                 Iscaled1=imgaussfilt(I,multiscale_sigma1);
@@ -871,7 +871,7 @@ for i=find(isTest)
             end
             
             % labels
-            Lmri=myMRIread(char(fullLabelFiles{j}));
+            Lmri=myMRIread(char(fullLabelFiles{j}),0,tempdir);
             L=Lmri.vol;
             if size(L,3)>1, error('Label files should not have multiple channels...'); end
             if any(L(:)>255), error('Labels cannot be greater than 255'); end
@@ -998,7 +998,7 @@ for i=find(isTest)
     try
         I=imread(imageFiles{i});
     catch
-        Imri=myMRIread(char(imageFiles{i}));
+        Imri=myMRIread(char(imageFiles{i}),0,tempdir);
         I=Imri.vol;
         if size(I,3)==1 && multiscale==1
             Iscaled1=imgaussfilt(I,multiscale_sigma1);
@@ -1118,7 +1118,7 @@ for i=find(isTest)
         try
             I=imread(imageFiles{i}); II=imread(imageFiles{indI}); JJ=imread(imageFiles{indJ});
         catch
-            Imri=myMRIread(char(imageFiles{i})); IImri=myMRIread(char(imageFiles{indI})); JJmri=myMRIread(char(imageFiles{indJ}));
+            Imri=myMRIread(char(imageFiles{i}),0,tempdir); IImri=myMRIread(char(imageFiles{indI}),0,tempdir); JJmri=myMRIread(char(imageFiles{indJ}),0,tempdir);
             I=Imri.vol; II=IImri.vol; JJ=JJmri.vol;
             if size(I,3)==1 && multiscale==1
                 Iscaled1=imgaussfilt(I,multiscale_sigma1);% Try varying the scale factor.
@@ -1232,7 +1232,7 @@ for i=find(isTest)
                 for j=[indI indJ]
                     % images
                     if strcmp(imageFiles{j}(end-1:end),'gz') % we support nifti and also normal images
-                        Imri=myMRIread(char(imageFiles{j}));
+                        Imri=myMRIread(char(imageFiles{j}),0,tempdir);
                         I=uint8(Imri.vol);
                     else
                         I=imread(imageFiles{j});
@@ -1248,7 +1248,7 @@ for i=find(isTest)
                     
                     % labels
                     if strcmp(fullLabelFiles{j}(end-1:end),'gz') % we support nifti and also normal images
-                        Lmri=myMRIread(char(fullLabelFiles{j}));
+                        Lmri=myMRIread(char(fullLabelFiles{j}),0,tempdir);
                         L=Lmri.vol;
                     else
                         L=imread(fullLabelFiles{j});
@@ -1259,7 +1259,7 @@ for i=find(isTest)
                 end
                 
                 if strcmp(imageFiles{i}(end-1:end),'gz') % we support nifti and also normal images
-                    Imri=myMRIread(char(imageFiles{i}));
+                    Imri=myMRIread(char(imageFiles{i}),0,tempdir);
                     I=uint8(Imri.vol);
                 else
                     I=imread(imageFiles{i});
