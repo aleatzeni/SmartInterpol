@@ -140,7 +140,11 @@ F3D = './functions/NiftyReg/Linux_files/niftyreg/reg-apps/reg_f3d';
 RESAMPLE = './functions/NiftyReg/Linux_files/niftyreg/reg-apps/reg_resample';
 TRANSFORM = './functions/NiftyReg/Linux_files/niftyreg/reg-apps/reg_transform';
 
-system(['chmod u+x ./functions/NiftyReg/Linux_files/niftyreg/reg-apps/reg_*' ])
+% Make NiftyReg commands executable
+system(['chmod u+x ' ALADIN ])
+system(['chmod u+x ' F3D ])
+system(['chmod u+x ' RESAMPLE ])
+system(['chmod u+x ' TRANSFORM ])
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % First thing: create output directory if necessary - or throw an error if
