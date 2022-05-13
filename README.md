@@ -34,6 +34,8 @@ might happen due to artefacts or large separation between sections to register;
 the MAS module is able to preserve anatomical shape, including faint boundaries 
 that rely on prior knowledge.
 
+![image](https://user-images.githubusercontent.com/22643621/168234713-a187692d-06f1-4aaa-befe-1985d2b2adac.png)
+![image](https://user-images.githubusercontent.com/22643621/168234863-c3e80fc1-101e-42ab-87e2-b442b5540909.png)
 
 *********************************************************
 Requirements
