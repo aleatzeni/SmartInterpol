@@ -37,6 +37,7 @@ that rely on prior knowledge.
 
 https://user-images.githubusercontent.com/22643621/168235485-2937396e-b084-45d4-9ea9-b5ebcd21f8aa.mp4
 
+Example of SmartInterpol applied to a stack of 2D histology sections of human brain tissue. The odd sections were manually segmented by trained research assistants, supervised by expert neuroanatomists; the segmentation of the even sections was estimated with SmartInterpol.
 
 *********************************************************
 Requirements
