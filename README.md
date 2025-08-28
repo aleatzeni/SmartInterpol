@@ -1,6 +1,6 @@
 
-### **SMART-INTERPOL**
-*********************************************************
+# **SMART-INTERPOL**
+
 
 Authors: **Alessia Atzeni** and **Juan Eugenio Iglesias**
 
@@ -17,9 +17,7 @@ Please cite this paper if you use this software for your research!
 
 
 
-*********************************************************
-Summary
-*********************************************************
+## Summary
 
 Smart Interpol is a semi-automated segmentation tool which, starting from a
 volume with a sparse subset of manually labelled slices, estimates the 
@@ -39,19 +37,17 @@ https://user-images.githubusercontent.com/22643621/168235485-2937396e-b084-45d4-
 
 Example of SmartInterpol applied to a stack of 2D histology sections of human brain tissue. The odd sections were manually segmented by trained research assistants, supervised by expert neuroanatomists; the segmentation of the even sections was estimated with SmartInterpol.
 
-*********************************************************
-Requirements
-*********************************************************
+## Requirements
+
 
 * A machine with a GPU - GPU memory requirements depend on size of input volume.
 
 * An installation of Matlab version R2019a/9.6 (newer and/or slightly older 
-version may also work, but have not been tried extensively).
+version may also work, but have not been tried extensively) with add-ons Image Processing Toolbox, Computer Vision Toolbox, Deep Learning Toolbox and Parallel Computing Toolbox
 
 
-*********************************************************
-Super-simple use with Matlab GUI 
-*********************************************************
+## Super-simple use with Matlab GUI 
+
 
 Simply run the following command from your Matlab terminal:
 
@@ -78,9 +74,8 @@ produces the best results.
 The output volumes will be at the same resolution of the input volume.
 
 
-*********************************************************
-Simple use from Matlab command line 
-*********************************************************
+
+## Simple use from Matlab command line 
 
 The main entry point of the code is SmartInterpol.m, which is a function that 
 requires four arguments:
@@ -126,9 +121,7 @@ Also, if the first or last slice are not labeled, the user is also required to
 follow the instructions on the screen.
 
 
-***********************************************
-* ADVANCED OPTIONS (from Matlab command line)
-***********************************************
+## ADVANCED OPTIONS (from Matlab command line)
 
 The function also accept optional parameters stored as Name-Value pairs:
 
